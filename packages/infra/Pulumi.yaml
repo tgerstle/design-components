@@ -1,4 +1,4 @@
-name: nextjs-cloudflare-infra
+name: opn-nxt-1-infra
 description: A minimal Pulumi TypeScript project for setting up Cloudflare OpenNext prerequisites.
 runtime: nodejs
 max-character-limit: 63

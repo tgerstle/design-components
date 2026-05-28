@@ -1,8 +1,8 @@
+import * as crypto from "node:crypto";
+import * as path from "node:path";
 import * as cloudflare from "@pulumi/cloudflare";
 import * as pulumi from "@pulumi/pulumi";
-import * as crypto from "crypto";
 import * as dotenv from "dotenv";
-import * as path from "path";
 
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 

@@ -77,14 +77,14 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           RESOURCE_NAMESPACE: ${{ secrets.RESOURCE_NAMESPACE }}
 
+      - run: pnpm build:all
+
       - name: Map dynamic properties via generate-wrangler.ts
         working-directory: apps/next-site
         run: pnpm exec tsx scripts/generate-wrangler.ts
         env:
           R2_BUCKET_NAME: ${{ steps.pulumi_up.outputs.r2BucketName }}
           WORKER_NAME: ${{ secrets.RESOURCE_NAMESPACE }}-next-site-${{ env.STACK_NAME }}
-
-      - run: pnpm build:all
 
       - name: Deploy Ephemeral Worker to Cloudflare
         id: deploy

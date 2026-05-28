@@ -2,14 +2,14 @@
 	"compilerOptions": {
 		"strict": true,
 		"outDir": "bin",
-		"target": "es2016",
-		"module": "commonjs",
+		"module": "NodeNext",
 		"sourceMap": true,
 		"experimentalDecorators": true,
 		"pretty": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "NodeNext"
 	},
 	"include": ["index.ts"]
 }

@@ -61,6 +61,6 @@ if ! gh auth status > /dev/null 2>&1; then
 fi
 
 echo "⬆️  Pushing secrets to GitHub Actions..."
-gh secret set -f .env
+bash ./bin/sync-secrets.sh
 
 echo "🎉 Setup complete! You are ready to deploy."

@@ -14,7 +14,7 @@
 		"lint": "biome check .",
 		"format": "biome check --write .",
 		"typecheck": "pnpm -r exec tsc --noEmit",
-		"sync-secrets": "gh secret set -f .env",
+		"sync-secrets": "bash ./bin/sync-secrets.sh",
 		"provision": "dotenv -- pnpm --filter infra up",
 		"ci:deploy-preview-dry-run": "pnpm build && pnpm build:open-next && echo 'Dry run preview build succeeded'",
 		"build:all": "pnpm build && pnpm build:open-next"

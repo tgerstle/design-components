@@ -1,0 +1,36 @@
+{
+	"name": "opennext_boilerplate",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"prepare": "husky",
+		"dev": "pnpm --filter next-site dev",
+		"build": "pnpm -r build",
+		"build:open-next": "pnpm --filter next-site build:open-next",
+		"test": "pnpm -r test",
+		"test:ci": "CI=true pnpm -r test",
+		"lint": "biome check .",
+		"format": "biome check --write .",
+		"typecheck": "pnpm -r exec tsc --noEmit",
+		"sync-secrets": "gh secret set -f .env",
+		"provision": "dotenv -- pnpm --filter infra up",
+		"ci:deploy-preview-dry-run": "pnpm build && pnpm build:open-next && echo 'Dry run preview build succeeded'",
+		"build:all": "pnpm build && pnpm build:open-next"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.16",
+		"dotenv-cli": "^11.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.0.5"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,json}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	}
+}

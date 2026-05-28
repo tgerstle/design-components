@@ -1,0 +1,65 @@
+name: Deploy OpenNext to Production
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install
+
+      - name: Code Quality Checks (Lint, Format, Typecheck, Test)
+        run: |
+          pnpm lint
+          pnpm typecheck
+          pnpm test:ci
+
+      - name: Provision Production Infrastructure via Pulumi
+        id: pulumi_up
+        uses: pulumi/actions@v5
+        with:
+          command: up
+          stack-name: prod
+          work-dir: packages/infra
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RESOURCE_NAMESPACE: ${{ secrets.RESOURCE_NAMESPACE }}
+
+      - name: Map production R2 bucket via generate-wrangler.ts
+        working-directory: apps/next-site
+        run: pnpm exec tsx scripts/generate-wrangler.ts
+        env:
+          R2_BUCKET_NAME: ${{ steps.pulumi_up.outputs.r2BucketName }}
+
+      - run: pnpm build:all
+
+      - name: Deploy Production Worker to Cloudflare
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: apps/next-site
+          command: deploy -c .open-next/wrangler.ci.json .open-next/worker.js --name ${{ secrets.RESOURCE_NAMESPACE }}-next-site --compatibility-date 2024-12-30
+          secrets: |
+            DEMO_SECRET_KEY
+        env:
+          DEMO_SECRET_KEY: ${{ secrets.DEMO_SECRET_KEY }}
+
+      - name: Report Deployment URL
+        run: |
+          echo "### 🚀 Production Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "URL: **${{ steps.deploy.outputs.deployment-url }}**" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,14 @@
+{
+	"name": "infra",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"up": "pulumi up --yes",
+		"destroy": "pulumi destroy --yes"
+	},
+	"dependencies": {
+		"@pulumi/cloudflare": "^6.17.0",
+		"@pulumi/pulumi": "^3.243.0",
+		"dotenv": "^17.4.2"
+	}
+}

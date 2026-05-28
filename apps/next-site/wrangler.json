@@ -1,0 +1,30 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "next-site",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-05-28",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	"images": {
+		"binding": "IMAGES"
+	},
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "next-site"
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"r2_buckets": [
+		{
+			"binding": "NEXT_CACHE_BUCKET",
+			"bucket_name": "my-nextjs-cache-bucket"
+		}
+	]
+}

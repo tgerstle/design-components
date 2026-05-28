@@ -21,10 +21,9 @@ done
 PROJECT_NAME=$(echo "$RAW_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g')
 echo "✅ Using sanitized project name: $PROJECT_NAME"
 
-# 3. Update Pulumi.yaml
-echo "📝 Updating Pulumi project name..."
-sed "s/^name: .*/name: ${PROJECT_NAME}-infra/" packages/infra/Pulumi.yaml > packages/infra/tmp_pulumi.yaml
-mv packages/infra/tmp_pulumi.yaml packages/infra/Pulumi.yaml
+# 3. Generate Pulumi.yaml from template
+echo "📝 Generating Pulumi.yaml from template..."
+sed "s/\${PROJECT_NAME}/${PROJECT_NAME}/g" packages/infra/Pulumi.yaml.template > packages/infra/Pulumi.yaml
 
 # 4. Handle .env setup
 if [ ! -f .env ]; then

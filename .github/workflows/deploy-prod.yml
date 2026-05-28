@@ -26,6 +26,9 @@ jobs:
           pnpm typecheck
           pnpm test:ci
 
+      - name: Generate Pulumi.yaml from template
+        run: sed "s/\${PROJECT_NAME}/${{ vars.RESOURCE_NAMESPACE }}/g" packages/infra/Pulumi.yaml.template > packages/infra/Pulumi.yaml
+
       - name: Provision Production Infrastructure via Pulumi
         id: pulumi_up
         uses: pulumi/actions@v5

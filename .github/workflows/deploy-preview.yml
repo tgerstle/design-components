@@ -20,6 +20,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
 
+      - name: Generate Pulumi.yaml from template
+        run: sed "s/\${PROJECT_NAME}/${{ vars.RESOURCE_NAMESPACE }}/g" packages/infra/Pulumi.yaml.template > packages/infra/Pulumi.yaml
+
       - name: Destroy Infrastructure (Pulumi)
         uses: pulumi/actions@v5
         with:
@@ -62,6 +65,9 @@ jobs:
           pnpm lint
           pnpm typecheck
           pnpm test:ci
+
+      - name: Generate Pulumi.yaml from template
+        run: sed "s/\${PROJECT_NAME}/${{ vars.RESOURCE_NAMESPACE }}/g" packages/infra/Pulumi.yaml.template > packages/infra/Pulumi.yaml
 
       - name: Provision Ephemeral Infrastructure via Pulumi
         id: pulumi_up

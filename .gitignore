@@ -6,3 +6,6 @@ node_modules/
 dist/
 coverage/
 wrangler.ci.json
+
+# Generated Pulumi config
+packages/infra/Pulumi.yaml

@@ -13,7 +13,7 @@ if (!r2BucketName) {
 
 // Read the tracked wrangler.json configuration
 const sourcePath = path.resolve(__dirname, "../wrangler.json");
-const targetPath = path.resolve(__dirname, "../.open-next/wrangler.ci.json");
+const targetPath = path.resolve(__dirname, "../wrangler.ci.json");
 
 if (!fs.existsSync(sourcePath)) {
 	console.error("Source wrangler.json not found.");

@@ -56,7 +56,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: apps/next-site
-          command: deploy -c .open-next/wrangler.ci.json .open-next/worker.js --compatibility-date 2024-12-30
+          command: deploy -c wrangler.ci.json .open-next/worker.js --compatibility-date 2024-12-30
           secrets: |
             DEMO_SECRET_KEY
         env:

@@ -24,6 +24,7 @@ jobs:
         uses: pulumi/actions@v5
         with:
           command: destroy
+          remove: true
           stack-name: ${{ env.STACK_NAME }}
           work-dir: packages/infra
         env:
@@ -67,6 +68,7 @@ jobs:
         uses: pulumi/actions@v5
         with:
           command: up
+          upsert: true
           stack-name: ${{ env.STACK_NAME }}
           work-dir: packages/infra
         env:

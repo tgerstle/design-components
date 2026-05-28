@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 const r2BucketName = process.env.R2_BUCKET_NAME;
+const workerName = process.env.WORKER_NAME;
 
 if (!r2BucketName) {
 	console.error(
@@ -33,6 +34,17 @@ if (config.r2_buckets && config.r2_buckets.length > 0) {
 	];
 }
 
+// Update the Worker Name and Self Reference if requested
+if (workerName) {
+	config.name = workerName;
+	if (config.services) {
+		config.services.forEach((service: { binding: string; service: string }) => {
+			if (service.binding === "WORKER_SELF_REFERENCE") {
+				service.service = workerName;
+			}
+		});
+	}
+}
 // Ensure target directory exists
 const targetDir = path.dirname(targetPath);
 if (!fs.existsSync(targetDir)) {

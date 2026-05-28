@@ -77,11 +77,12 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           RESOURCE_NAMESPACE: ${{ secrets.RESOURCE_NAMESPACE }}
 
-      - name: Map dynamic R2 bucket via generate-wrangler.ts
+      - name: Map dynamic properties via generate-wrangler.ts
         working-directory: apps/next-site
         run: pnpm exec tsx scripts/generate-wrangler.ts
         env:
           R2_BUCKET_NAME: ${{ steps.pulumi_up.outputs.r2BucketName }}
+          WORKER_NAME: ${{ secrets.RESOURCE_NAMESPACE }}-next-site-${{ env.STACK_NAME }}
 
       - run: pnpm build:all
 
@@ -92,7 +93,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: apps/next-site
-          command: deploy -c .open-next/wrangler.ci.json .open-next/worker.js --name ${{ secrets.RESOURCE_NAMESPACE }}-next-site-${{ env.STACK_NAME }} --compatibility-date 2024-12-30
+          command: deploy -c .open-next/wrangler.ci.json .open-next/worker.js --compatibility-date 2024-12-30
           secrets: |
             DEMO_SECRET_KEY
         env:

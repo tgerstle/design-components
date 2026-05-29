@@ -111,6 +111,7 @@ Pushing or merging directly to the `main` branch triggers `.github/workflows/dep
 │   └── next-site/           # The Next.js Application
 │       └── scripts/         # Auto-generators for Wrangler config (generate-wrangler.ts)
 ├── bin/
+│   ├── destory.sh           # Destroy using Pulumi and Wrangler
 │   ├── setup.sh             # Interactive local repository bootstrapper
 │   └── sync-secrets.sh      # Pushes `.env` contents securely into GitHub
 ├── packages/

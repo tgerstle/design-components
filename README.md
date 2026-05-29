@@ -114,9 +114,11 @@ Pushing or merging directly to the `main` branch triggers `.github/workflows/dep
 │   ├── destory.sh           # Destroy using Pulumi and Wrangler
 │   ├── setup.sh             # Interactive local repository bootstrapper
 │   └── sync-secrets.sh      # Pushes `.env` contents securely into GitHub
+├── docs/
+│   └── boilerplate-reference/ # Historical architecture decisions & boilerplate specs
 ├── packages/
 │   └── infra/               # Pulumi TS source for Cloudflare integration
-├── specs/                   # Historical tech specifications & documentation
+├── specs/                   # Blank canvas for YOUR application specifications & AI-tracking
 └── .github/workflows/       # The CI/CD pipelines
 ```
 

@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"setup": "bash ./bin/setup.sh",
+		"destroy": "bash ./bin/destroy.sh",
 		"prepare": "husky",
 		"dev": "pnpm --filter next-site dev",
 		"build": "pnpm -r build",

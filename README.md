@@ -23,7 +23,7 @@ Before you start, ensure you have the following installed locally:
 
 ### Required External Service Accounts
 
-1. **Cloudflare**: You'll need an active account ID, an API Token (with access to Workers, Domains,/Routes, and R2), and specific R2 S3-Compatible Credentials.
+1. **Cloudflare**: You'll need an active account ID, an API Token (with access to Workers Scripts, Workers KV, Domains/Routes, and R2), and specific R2 S3-Compatible Credentials.
 2. **Pulumi Cloud**: A free tier account and an Access Token to manage your state remotely. 
 
 *(See `.env.example` in this repository for exact permission requirements).*
@@ -76,6 +76,15 @@ To test building the OpenNext adapter locally:
 pnpm build
 pnpm build:open-next
 ```
+
+### 🧨 Teardown / Destroy
+
+If you ever want to tear down all of the resources provisioned by your Pulumi `prod` stack, there is a helpful wrapper command that ensures your Cloudflare Workers, KV, and R2 buckets are gracefully removed.
+
+```bash
+pnpm destroy
+```
+
 
 ---
 

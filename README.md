@@ -1,130 +1,64 @@
-# 🚀 OpenNext + Pulumi + Cloudflare Boilerplate
+# 🎨 Design Components & Theming System
 
-A robust, production-ready boilerplate for deploying Next.js applications to Cloudflare using OpenNext. This repository uses Pulumi for Infrastructure as Code (IaC) and is fully automated via parameterized GitHub Actions.
+A modern, highly-scalable design system and component library built for robust Next.js applications. This monorepo demonstrates an advanced declarative CSS custom-property theme architecture that dynamically scales fonts, border radii, and colors.
 
 ## 🌟 Features
 
-- **Next.js & OpenNext**: Run modern Next.js apps seamlessly on Cloudflare Workers and R2.
-- **Pulumi IaC**: Infrastructure as Code to manage Cloudflare Workers, KV namespaces, and R2 buckets securely and repeatably.
-- **GitHub Actions Auto-Deploy**: Automated isolated previews triggered on Pull Requests, and zero-downtime production deployments mapped to `main`.
-- **Dynamic Configuration**: Fully automates Wrangler generation based on your Pulumi infrastructure IDs (bypassing strict path resolutions and Cloudflare mapping limits).
-- **Environment Management**: Secure GitHub Variables & Secret syncing out of the box.
+- **Dynamic Theme Architecture**: Deep CSS variable integration supporting light, dark, and system modes alongside real-time primary color hue scaling.
+- **Tailwind CSS v4 Integration**: Leveraging the modern Tailwind engine tightly coupled with our `theme.css` token system.
+- **Robust Component Library**: An independent, localized `packages/ui` featuring accessible primitives like `Button`, `Combobox`, `CommandPalette`, `DataTable`, `DateRangePicker`, `SmartPopover`, and `ToastManager`.
+- **Composite Widgets**: Extensible high-level structural components (like a `Hero` section) included in `packages/widgets`.
+- **Storybook Included**: Dedicated `apps/storybook` workspace to develop, test, and document UI primitives in complete isolation.
+- **Next.js Implementation**: `apps/next-site` acts as the primary web consumer, showcasing layout patterns, Next.js `globals.css` import rules, and runtime interactions (`ColorPicker`, `ThemeToggle`).
+- **Turborepo & pnpm**: Lightning-fast monorepo task orchestration and strict package linking.
 
----
-
-## 🛠️ Prerequisites
-
-Before you start, ensure you have the following installed locally:
-
-- **[Node.js](https://nodejs.org/)** (v18+ recommended)
-- **[pnpm](https://pnpm.io/)** (`npm install -g pnpm`)
-- **[GitHub CLI (`gh`)](https://cli.github.com/)** and currently authenticated (`gh auth login`).
-- **[Pulumi CLI](https://www.pulumi.com/docs/install/)**
-
-### Required External Service Accounts
-
-1. **Cloudflare**: You'll need an active account ID, an API Token (with access to Workers Scripts, Workers KV, Domains/Routes, and R2), and specific R2 S3-Compatible Credentials.
-2. **Pulumi Cloud**: A free tier account and an Access Token to manage your state remotely. 
-
-*(See `.env.example` in this repository for exact permission requirements).*
-
----
-
-## 👩‍💻 Getting Started
-
-### 1. Clone & Install
-
-```bash
-git clone <your-repo-url>
-cd opennext_boilerplate
-pnpm install
-```
-
-### 2. Run the Setup Wizard
-
-This boilerplate includes a helpful setup script meant to initialize your Pulumi templates, set up your variables, and sync them immediately to your GitHub Repository to prime it for CI/CD operations.
-
-```bash
-pnpm run setup
-```
-
-**What this script does:**
-1. Verifies prerequisites.
-2. Prompts you for a **Project Name** (used as a global namespace).
-3. Generates the `packages/infra/Pulumi.yaml` configuration specific to your instance without committing it structurally (via `Pulumi.yaml.template`).
-4. Copies `.env.example` to `.env` locally.
-5. Pauses and waits for you to insert all your actual tokens/keys into `.env`.
-6. Instantiates your Pulumi `prod` stack.
-7. Executes `bin/sync-secrets.sh` to securely create GitHub Repository Secrets and Variables using the `gh` CLI.
-
-*(If you ever need to manually update your GitHub Actions secrets if they change locally, you can run `bash bin/sync-secrets.sh` at any time).*
-
----
-
-## 🏎️ Local Development
-
-To run the Next.js site locally:
-
-```bash
-pnpm dev
-```
-
-*(This leverages the standard Next.js development server running on `localhost:3000` context).*
-
-To test building the OpenNext adapter locally:
-```bash
-pnpm build
-pnpm build:open-next
-```
-
-### 🧨 Teardown / Destroy
-
-If you ever want to tear down all of the resources provisioned by your Pulumi `prod` stack, there is a helpful wrapper command that ensures your Cloudflare Workers, KV, and R2 buckets are gracefully removed.
-
-```bash
-pnpm destroy
-```
-
-
----
-
-## 🌐 CI/CD & Deployments
-
-Deployments are entirely offloaded to **GitHub Actions**, preventing local state collisions and ensuring safe, verified releases.
-
-### Preview Environments
-When you open or synchronize a Pull Request, the `.github/workflows/deploy-preview.yml` action fires.
-- Creates an **ephemeral** stack (e.g., `nxt-one-pr-14`).
-- Automates Pulumi `up` to provision independent resources.
-- Injects a PR Comment with your temporary Cloudflare URL.
-- When the PR is merged or closed, the action automatically securely destroys the preview infrastructure.
-
-### Production Environment
-Pushing or merging directly to the `main` branch triggers `.github/workflows/deploy-prod.yml`.
-- Provisions against the `prod` Pulumi Stack.
-- Builds the app and assigns it standard live application identifiers.
-
-### 🏗️ Project Architecture
+## 🏗️ Project Architecture
 
 ```text
 ├── apps/
-│   └── next-site/           # The Next.js Application
-│       └── scripts/         # Auto-generators for Wrangler config (generate-wrangler.ts)
-├── bin/
-│   ├── destory.sh           # Destroy using Pulumi and Wrangler
-│   ├── setup.sh             # Interactive local repository bootstrapper
-│   └── sync-secrets.sh      # Pushes `.env` contents securely into GitHub
-├── docs/
-│   └── boilerplate-reference/ # Historical architecture decisions & boilerplate specs
+│   ├── next-site/           # The primary Next.js (App Router) application showcasing the theme
+│   └── storybook/           # Interactive component environment for isolated UI development
 ├── packages/
-│   └── infra/               # Pulumi TS source for Cloudflare integration
-├── specs/                   # Blank canvas for YOUR application specifications & AI-tracking
-└── .github/workflows/       # The CI/CD pipelines
+│   ├── config/              # Shared base TypeScript & Biome configurations
+│   ├── tokens/              # Foundation layer containing theme.css and Tailwind v4 definitions
+│   ├── ui/                  # Core React components suite
+│   └── widgets/             # Complex structural blocks (e.g. Hero layouts)
+├── specs/                   # Architectural strategies, component docs, and roadmap
+```
+
+## 👩‍💻 Getting Started
+
+### 1. Clone & Install Dependencies
+
+```bash
+git clone <your-repo-url>
+cd design-components
+pnpm install
+```
+
+### 2. Run the Next.js Sandbox
+
+Interact with the real-time runtime theme toggles and color pickers:
+
+```bash
+pnpm dev
+# Spin up the main orchestrator (defaults to localhost:3000)
+```
+
+### 3. Run Storybook
+
+Develop or interact with design primitives and components in a highly isolated browser environment:
+
+```bash
+pnpm run --filter storybook dev
 ```
 
 ---
 
-## 🛡️ Important Notes on Secrets & State
+## 🎨 Theme & Component Strategy
 
-- **`Pulumi.yaml` is intentionally ignored by git**: Because multiple forks/instantiations of a boilerplate must use different project names, `Pulumi.yaml` is not stored in history. It is generated from `Pulumi.yaml.template` locally by the `setup` script, and remotely inside the CI/CD pipeline immediately before taking action.
-- **GitHub Secrets vs Variables**: We partition plain-text data (like `RESOURCE_NAMESPACE`) into GitHub Configuration Variables, while sensitive tokens are strictly stored as GitHub Secrets to avoid `***` log-masking issues when generating dynamic naming schemes in Cloudflare.
+At the core of this system is `packages/tokens/theme.css`. We use structural `<html data-theme="...">` mapping across rendering primitives to prevent CSS compiler panics.
+
+Instead of hardcoding Tailwind color utilities everywhere (`bg-blue-500`), the package library aggressively consumes context-aware variables. When the application needs to change its theme dynamically, state managers inject new hues at the `:root` level enabling everything to paint automatically with no JavaScript calculation overhead. 
+
+For more details on the testing strategies, token strategies, or component logic, refer to the documentation inside the `/specs/design_components/` directory.

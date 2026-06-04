@@ -1,0 +1,21 @@
+{
+	"name": "@design_components/widgets",
+	"version": "0.0.0",
+	"private": true,
+	"main": "src/index.ts",
+	"dependencies": {
+		"@design_components/tokens": "workspace:*",
+		"@design_components/ui": "workspace:*",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6"
+	},
+	"devDependencies": {
+		"@design_components/config": "workspace:*",
+		"@types/react": "^19.2.15",
+		"@types/react-dom": "^19.2.3",
+		"typescript": "^5.0.0"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit"
+	}
+}

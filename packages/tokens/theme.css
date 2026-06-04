@@ -1,0 +1,190 @@
+@plugin "tailwindcss-animate";
+
+:root {
+        /* 1. Typography Primitives */
+        --font-sans: var(--font-inter);
+        --font-mono:
+                ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+                "Courier New", monospace;
+
+        /* 2. Color Primitives: Slate (Neutrals) */
+        --slate-50: #f8fafc;
+        --slate-100: #f1f5f9;
+        --slate-200: #e2e8f0;
+        --slate-300: #cbd5e1;
+        --slate-400: #94a3b8;
+        --slate-500: #64748b;
+        --slate-600: #475569;
+        --slate-700: #334155;
+        --slate-800: #1e293b;
+        --slate-900: #0f172a;
+        --slate-950: #020617;
+
+        /* 3. Color Primitives: Brand Colors */
+        /* Blue */
+        --blue-400: #60a5fa;
+        --blue-500: #3b82f6;
+        --blue-600: #2563eb;
+        --blue-700: #1d4ed8;
+        /* Emerald */
+        --emerald-400: #34d399;
+        --emerald-500: #10b981;
+        --emerald-600: #059669;
+        --emerald-700: #047857;
+        /* Violet */
+        --violet-400: #a78bfa;
+        --violet-500: #8b5cf6;
+        --violet-600: #7c3aed;
+        --violet-700: #6d28d9;
+        /* Rose */
+        --rose-400: #fb7185;
+        --rose-500: #f43f5e;
+        --rose-600: #e11d48;
+        --rose-700: #be123c;
+        
+        /* Secondary / Semantic Additions */
+        --orange-500: #f97316;
+        --orange-600: #ea580c;
+        --fuchsia-500: #d946ef;
+        --fuchsia-600: #c026d3;
+        --crimson-500: #e11d48;
+        --crimson-600: #be123c;
+
+        /* 4. Semantic Base Tokens (Light) */
+        --color-background: #ffffff;
+        --color-surface: #ffffff;
+        --color-surface-hover: var(--slate-100);
+        --color-popover: #ffffff;
+        --color-foreground: var(--slate-900);
+        --color-border: var(--slate-200);
+
+        --color-secondary: var(--slate-100);
+        --color-secondary-hover: var(--slate-200);
+        --color-secondary-foreground: var(--slate-900);
+
+        --color-success: #16a34a;
+        --color-info: #0284c7;
+        --color-warning: #d97706;
+        --color-danger: #dc2626;  /* Default Blue Theme Red */
+
+        /* Default Primary (Blue) */
+        --color-primary: var(--blue-600);
+        --color-primary-hover: var(--blue-700);
+        --color-primary-foreground: #ffffff;
+
+        /* Base Border Radius (Blue theme defaults) */
+        --radius-sm: 0.25rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+
+        /* Base Font defaults */
+        --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        --font-nunito: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+        --font-playfair: 'Playfair Display', ui-serif, Georgia, serif;
+        --font-roboto-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, monospace;
+
+        /* 5. Typography Golden Ratio Scale */
+        --text-xs: 0.618rem;
+        --text-sm: 0.786rem;
+        --text-base: 1rem;
+        --text-lg: 1.272rem;
+        --text-xl: 1.618rem;
+        --text-2xl: 2.058rem;
+        --text-3xl: 2.618rem;
+        --text-4xl: 3.33rem;
+        --text-5xl: 4.236rem;
+
+        --line-height-xs: 1.618;
+        --line-height-sm: 1.618;
+        --line-height-base: 1.618;
+        --line-height-lg: 1.5;
+        --line-height-xl: 1.2;
+        --line-height-2xl: 1.2;
+        --line-height-3xl: 1.1;
+        --line-height-4xl: 1.1;
+        --line-height-5xl: 1;
+}
+
+/* --- LIGHT THEME PRESETS --- */
+:root[data-theme="blue"] {
+        --color-primary: var(--blue-600);
+        --color-primary-hover: var(--blue-700);
+        --color-danger: #dc2626; /* Red */
+        --font-sans: var(--font-inter);
+        --radius-sm: 0.25rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+}
+:root[data-theme="emerald"] {
+        --color-primary: var(--emerald-600);
+        --color-primary-hover: var(--emerald-700);
+        --color-danger: var(--orange-600);
+        --font-sans: var(--font-roboto-mono); /* Dense, tech, utilitarian */
+        --radius-sm: 0rem;
+        --radius-md: 0.125rem;
+        --radius-lg: 0.25rem; /* Sharp edges */
+}
+:root[data-theme="violet"] {
+        --color-primary: var(--violet-600);
+        --color-primary-hover: var(--violet-700);
+        --color-danger: var(--fuchsia-600);
+        --font-sans: var(--font-playfair); /* Editorial serif */
+        --radius-sm: 0.125rem;
+        --radius-md: 0.25rem;
+        --radius-lg: 0.375rem; /* Subtle, elegant curves */
+}
+:root[data-theme="rose"] {
+        --color-primary: var(--rose-600);
+        --color-primary-hover: var(--rose-700);
+        --color-danger: var(--crimson-600);
+        --font-sans: var(--font-nunito); /* Playful, rounded */
+        --radius-sm: 1rem;
+        --radius-md: 1.5rem;
+        --radius-lg: 2rem; /* Heavy pill shapes */
+}
+
+/* --- DARK THEME OVERLAYS --- */
+/* Base Dark Mode */
+.dark {
+        --color-background: var(--slate-950);
+        --color-surface: var(--slate-900);
+        --color-surface-hover: var(--slate-800);
+        --color-popover: var(--slate-900);
+        --color-foreground: var(--slate-50);
+        --color-border: var(--slate-800);
+
+        --color-secondary: var(--slate-800);
+        --color-secondary-hover: var(--slate-700);
+        --color-secondary-foreground: var(--slate-50);
+
+        /* Default Dark Primary/Danger (Blue) */
+        --color-primary: var(--blue-500);
+        --color-primary-hover: var(--blue-400);
+        
+        --color-success: #22c55e;
+        --color-warning: #f59e0b;
+        --color-info: #0ea5e9;
+        --color-danger: #ef4444; /* Dark Red */
+}
+
+/* Dark Theme Presets */
+.dark[data-theme="blue"], .dark [data-theme="blue"] {
+        --color-primary: var(--blue-500);
+        --color-primary-hover: var(--blue-400);
+        --color-danger: #ef4444;
+}
+.dark[data-theme="emerald"], .dark [data-theme="emerald"] {
+        --color-primary: var(--emerald-500);
+        --color-primary-hover: var(--emerald-400);
+        --color-danger: var(--orange-500);
+}
+.dark[data-theme="violet"], .dark [data-theme="violet"] {
+        --color-primary: var(--violet-500);
+        --color-primary-hover: var(--violet-400);
+        --color-danger: var(--fuchsia-500);
+}
+.dark[data-theme="rose"], .dark [data-theme="rose"] {
+        --color-primary: var(--rose-500);
+        --color-primary-hover: var(--rose-400);
+        --color-danger: var(--crimson-500);
+}

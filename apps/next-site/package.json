@@ -10,15 +10,23 @@
 		"start": "next start",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
+		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@design_components/tokens": "workspace:*",
+		"@design_components/ui": "workspace:*",
+		"@design_components/widgets": "workspace:*",
 		"@opennextjs/cloudflare": "^1.19.9",
+		"lucide-react": "^1.17.0",
 		"next": "16.2.6",
+		"next-themes": "^0.4.6",
 		"react": "^19.1.7",
-		"react-dom": "^19.1.7"
+		"react-dom": "^19.1.7",
+		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {
+		"@design_components/config": "workspace:*",
 		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "^4",
 		"@types/node": "^20.19.41",

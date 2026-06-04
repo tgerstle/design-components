@@ -1,0 +1,8 @@
+{
+	"extends": "@design_components/config/tsconfig.react.json",
+	"compilerOptions": {
+		"outDir": "dist"
+	},
+	"include": ["src", ".storybook"],
+	"exclude": ["node_modules"]
+}

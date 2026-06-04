@@ -1,24 +1,26 @@
 {
 	"name": "opennext_boilerplate",
 	"version": "1.0.0",
+	"packageManager": "pnpm@11.0.8",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"setup": "bash ./bin/setup.sh",
 		"destroy": "bash ./bin/destroy.sh",
 		"prepare": "husky",
-		"dev": "pnpm --filter next-site dev",
-		"build": "pnpm -r build",
+		"dev": "turbo run dev --filter=next-site",
+		"storybook": "turbo run dev --filter=storybook",
+		"build": "turbo run build",
 		"build:open-next": "pnpm --filter next-site build:open-next",
-		"test": "pnpm -r test",
-		"test:ci": "CI=true pnpm -r test",
+		"test": "turbo run test",
+		"test:ci": "CI=true turbo run test",
 		"lint": "biome check .",
 		"format": "biome check --write .",
-		"typecheck": "pnpm -r exec tsc --noEmit",
+		"typecheck": "turbo run typecheck",
+		"validate": "turbo run \"//#lint\" typecheck test",
 		"sync-secrets": "bash ./bin/sync-secrets.sh",
 		"provision": "dotenv -- pnpm --filter infra up",
-		"ci:deploy-preview-dry-run": "pnpm build && pnpm build:open-next && echo 'Dry run preview build succeeded'",
-		"build:all": "pnpm build && pnpm build:open-next"
+		"ci:deploy-preview-dry-run": "pnpm build && pnpm build:open-next && echo 'Dry run preview build succeeded'"
 	},
 	"keywords": [],
 	"author": "",
@@ -26,9 +28,19 @@
 	"type": "module",
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.2",
+		"@testing-library/user-event": "^14.6.1",
+		"@vitejs/plugin-react": "^6.0.2",
 		"dotenv-cli": "^11.0.0",
 		"husky": "^9.1.7",
-		"lint-staged": "^17.0.5"
+		"jsdom": "^29.1.1",
+		"lint-staged": "^17.0.5",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6",
+		"turbo": "^2.9.16",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.7"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,json}": [

@@ -11,6 +11,7 @@
 		"dev": "turbo run dev --filter=next-site",
 		"storybook": "turbo run dev --filter=storybook",
 		"build": "turbo run build",
+		"build:all": "pnpm build && pnpm build:open-next",
 		"build:open-next": "pnpm --filter next-site build:open-next",
 		"test": "turbo run test",
 		"test:ci": "CI=true turbo run test --filter=!storybook",

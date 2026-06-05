@@ -15,7 +15,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className="antialiased min-h-screen bg-background text-foreground font-sans">
-				{/* @ts-expect-error next-themes mismatch */}
+				{/* @ts-ignore next-themes mismatch */}
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 					{children}
 				</ThemeProvider>

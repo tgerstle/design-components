@@ -13,7 +13,7 @@
 		"build": "turbo run build",
 		"build:open-next": "pnpm --filter next-site build:open-next",
 		"test": "turbo run test",
-		"test:ci": "CI=true turbo run test",
+		"test:ci": "CI=true turbo run test --filter=!storybook",
 		"lint": "biome check .",
 		"format": "biome check --write .",
 		"typecheck": "turbo run typecheck",

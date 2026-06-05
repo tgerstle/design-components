@@ -1,0 +1,77 @@
+try {
+	(() => {
+		var O = __STORYBOOK_API__,
+			{
+				ActiveTabs: T,
+				Consumer: h,
+				ManagerContext: k,
+				Provider: f,
+				RequestResponseError: U,
+				addons: d,
+				combineParameters: v,
+				controlOrMetaKey: A,
+				controlOrMetaSymbol: x,
+				eventMatchesShortcut: P,
+				eventToShortcut: M,
+				experimental_MockUniversalStore: R,
+				experimental_UniversalStore: C,
+				experimental_requestResponse: w,
+				experimental_useUniversalStore: B,
+				isMacLike: E,
+				isShortcutTaken: I,
+				keyToSymbol: K,
+				merge: N,
+				mockChannel: G,
+				optionOrAltSymbol: L,
+				shortcutMatchesShortcut: Y,
+				shortcutToHumanString: q,
+				types: D,
+				useAddonState: F,
+				useArgTypes: H,
+				useArgs: j,
+				useChannel: V,
+				useGlobalTypes: z,
+				useGlobals: J,
+				useParameter: Q,
+				useSharedState: W,
+				useStoryPrepared: X,
+				useStorybookApi: Z,
+				useStorybookState: $,
+			} = __STORYBOOK_API__;
+		var m = (() => {
+				let e;
+				return (
+					typeof window < "u"
+						? (e = window)
+						: typeof globalThis < "u"
+							? (e = globalThis)
+							: typeof window < "u"
+								? (e = window)
+								: typeof self < "u"
+									? (e = self)
+									: (e = {}),
+					e
+				);
+			})(),
+			p = "tag-filters",
+			i = "static-filter";
+		d.register(p, (e) => {
+			const u = Object.entries(m.TAGS_OPTIONS ?? {}).reduce((o, t) => {
+				const [s, a] = t;
+				return a.excludeFromSidebar && (o[s] = !0), o;
+			}, {});
+			e.experimental_setFilter(i, (o) => {
+				const t = o.tags ?? [];
+				return (
+					(t.includes("dev") || o.type === "docs") &&
+					t.filter((s) => u[s]).length === 0
+				);
+			});
+		});
+	})();
+} catch (e) {
+	console.error(
+		"[Storybook] One of your manager-entries failed: " + import.meta.url,
+		e,
+	);
+}

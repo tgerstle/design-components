@@ -11,3 +11,4 @@ wrangler.ci.json
 packages/infra/Pulumi.yaml
 
 .turbo
+storybook-static/

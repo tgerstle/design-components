@@ -3,8 +3,36 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "Design Components",
-	description: "A showcase of the Design System components.",
+	metadataBase: new URL(
+		process.env.NODE_ENV === "production"
+			? "https://design-components.workers.dev"
+			: "http://localhost:3000",
+	),
+	title: {
+		template: "%s | Design Components",
+		default: "Design Components",
+	},
+	description:
+		"A highly scalable, declarative CSS custom-property theme architecture and UI library.",
+	keywords: [
+		"Next.js",
+		"Design System",
+		"Tailwind CSS",
+		"React Aria",
+		"Turborepo",
+		"Cloudflare",
+		"OpenNext",
+	],
+	authors: [{ name: "T Gerstle" }],
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "/",
+		title: "Design Components & Config",
+		description:
+			"A modern, highly-scalable design system and component library built for robust Next.js applications.",
+		siteName: "Design Components",
+	},
 };
 
 export default function RootLayout({

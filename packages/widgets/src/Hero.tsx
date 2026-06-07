@@ -4,7 +4,7 @@ import type React from "react";
 export interface HeroProps {
 	title: string;
 	description: string;
-	primaryCtaText: string;
+	primaryCtaText?: string;
 	secondaryCtaText?: string;
 	onPrimaryClick?: () => void;
 }
@@ -26,9 +26,11 @@ export const Hero: React.FC<HeroProps> = ({
 			</p>
 
 			<div className="flex gap-4">
-				<Button variant="primary" onClick={onPrimaryClick}>
-					{primaryCtaText}
-				</Button>
+				{primaryCtaText && (
+					<Button variant="primary" onClick={onPrimaryClick}>
+						{primaryCtaText}
+					</Button>
+				)}
 				{secondaryCtaText && (
 					<Button variant="secondary">{secondaryCtaText}</Button>
 				)}

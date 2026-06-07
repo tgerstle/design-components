@@ -10,6 +10,7 @@ import {
 } from "@design_components/ui";
 import { Hero } from "@design_components/widgets";
 import { Activity, Copy, Cpu, HardDrive, Plus, Terminal } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ColorPicker } from "../components/ColorPicker";
 import { ThemeToggle } from "../components/ThemeToggle";
@@ -87,7 +88,6 @@ export default function Home() {
 					<Toast toast={toast} onClose={() => setToast(null)} />
 				</ToastRegion>
 			)}
-
 			{/* Navbar */}
 			<header className="sticky top-0 z-50 w-full border-b border-border bg-surface/80 backdrop-blur">
 				<div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -101,24 +101,35 @@ export default function Home() {
 					</div>
 				</div>
 			</header>
-
 			{/* Main Content */}
 			<main className="flex-1 container mx-auto px-4 py-8 lg:py-12 space-y-12">
 				{/* Hero Section */}
 				<section>
+					<div className="bg-primary/10 border-l-4 border-primary p-4 mb-8 rounded-r-md flex justify-center">
+						<p className="text-sm font-medium text-foreground">
+							✨ <strong>Pro Tip:</strong> Try changing the Primary Color and
+							toggling Dark Mode in the top right! Watch as every component
+							instantly repaints via our native CSS token engine.
+						</p>
+					</div>
 					<Hero
-						title="Design System Demo"
-						description="A strictly typed, highly customizable React Aria component library tailored for dynamic theming."
-						primaryCtaText="Get Started"
+						title="Declarative Edge Components"
+						description="A robust, highly scalable UI library built on React Aria and Tailwind v4. Designed for strict monorepo architecture and dynamically tokenized by a native, JS-free CSS custom-property theme engine."
 					/>
 					<div className="flex justify-center gap-4 mt-8">
-						<Button onPress={() => alert("Get Started!")}>
+						<Button>
 							<Terminal className="w-4 h-4 mr-2" />
-							Get Started
+							<a
+								href="https://github.com/tgerstle/design-components"
+								target="_blank"
+								rel="noreferrer"
+							>
+								GitHub Repo
+							</a>
 						</Button>
-						<Button variant="outline" onPress={() => alert("View Docs!")}>
-							Documentation
-						</Button>
+						<Link href="/docs">
+							<Button variant="outline">Documentation</Button>
+						</Link>
 					</div>
 				</section>
 

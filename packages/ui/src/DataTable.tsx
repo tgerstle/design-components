@@ -34,7 +34,7 @@ export const DataTable = <T extends object>({
 		>
 			<TableHeader
 				columns={columns}
-				className="bg-table-header-bg text-foreground border-b border-border"
+				className="bg-surface-hover text-foreground border-b border-border"
 			>
 				{(column: DataTableColumn) => (
 					<Column
@@ -49,7 +49,7 @@ export const DataTable = <T extends object>({
 				{(item: T) => (
 					<Row
 						columns={columns}
-						className="data-[hovered]:bg-table-row-hover data-[selected]:bg-surface-hover border-b border-border/50 cursor-pointer outline-none data-[focus-visible]:outline-2 data-[focus-visible]:outline-primary data-[focus-visible]:-outline-offset-2"
+						className="data-[hovered]:bg-surface-hover data-[selected]:bg-surface-hover border-b border-border/50 cursor-pointer outline-none data-[focus-visible]:outline-2 data-[focus-visible]:outline-primary data-[focus-visible]:-outline-offset-2"
 					>
 						{(column: DataTableColumn) => (
 							<Cell className="p-3 text-sm">

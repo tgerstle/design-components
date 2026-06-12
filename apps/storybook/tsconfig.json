@@ -1,8 +1,9 @@
 {
 	"extends": "@design_components/config/tsconfig.react.json",
 	"compilerOptions": {
+		"moduleResolution": "bundler",
 		"outDir": "dist"
 	},
-	"include": ["src", ".storybook"],
+	"include": [".storybook/**/*", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]
 }

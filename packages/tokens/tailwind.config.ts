@@ -5,6 +5,8 @@ const config: Config = {
 		"../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
 		"../../packages/widgets/src/**/*.{js,ts,jsx,tsx}",
 		"../../apps/next-site/src/**/*.{js,ts,jsx,tsx}",
+		"../../apps/storybook/.storybook/**/*.{js,ts,jsx,tsx}",
+		"../../apps/storybook/src/**/*.{js,ts,jsx,tsx}",
 	],
 	darkMode: "class",
 	theme: {
@@ -36,8 +38,11 @@ const config: Config = {
 			spacing: {
 				"1": "0.25rem",
 				"2": "0.5rem",
-				"3": "1rem",
-				"4": "1.5rem",
+				"3": "0.75rem",
+				"4": "1rem",
+				"5": "1.25rem",
+				"6": "1.5rem",
+				"8": "2rem",
 			},
 			fontSize: {
 				xs: ["var(--text-xs)", "var(--line-height-xs)"],

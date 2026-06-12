@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "@design_components/tokens/theme.css";
-@config "@design_components/tokens/tailwind.config.ts";
+@import "../../packages/tokens/theme.css";
+@config "../../packages/tokens/tailwind.config.ts";
 
 :root {
 	--background: #ffffff;

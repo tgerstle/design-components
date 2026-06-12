@@ -47,10 +47,15 @@ export const DataTable = <T extends object>({
 			</TableHeader>
 			<TableBody items={rows}>
 				{(item: T) => (
-					<Row className="data-[hovered]:bg-table-row-hover data-[selected]:bg-surface-hover border-b border-border/50 cursor-pointer outline-none data-[focus-visible]:outline-2 data-[focus-visible]:outline-primary data-[focus-visible]:-outline-offset-2">
-						{(columnKey: string | number) => (
+					<Row
+						columns={columns}
+						className="data-[hovered]:bg-table-row-hover data-[selected]:bg-surface-hover border-b border-border/50 cursor-pointer outline-none data-[focus-visible]:outline-2 data-[focus-visible]:outline-primary data-[focus-visible]:-outline-offset-2"
+					>
+						{(column: DataTableColumn) => (
 							<Cell className="p-3 text-sm">
-								{String((item as Record<string | number, unknown>)[columnKey])}
+								{String(
+									(item as Record<string | number, unknown>)[column.id] ?? "",
+								)}
 							</Cell>
 						)}
 					</Row>

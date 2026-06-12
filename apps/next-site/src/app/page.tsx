@@ -43,9 +43,9 @@ const tableData = [
 ];
 
 const tableColumns = [
-	{ id: "name", name: "Name", isRowHeader: true },
+	{ id: "label", name: "Name", isRowHeader: true },
 	{ id: "status", name: "Status" },
-	{ id: "role", name: "Role" },
+	{ id: "resources", name: "Resources" },
 ];
 
 export default function Home() {
@@ -113,7 +113,7 @@ export default function Home() {
 						</p>
 					</div>
 					<Hero
-						title="Declarative Edge Components"
+						title="Design Components"
 						description="A robust, highly scalable UI library built on React Aria and Tailwind v4. Designed for strict monorepo architecture and dynamically tokenized by a native, JS-free CSS custom-property theme engine."
 					/>
 					<div className="flex justify-center gap-4 mt-8">
